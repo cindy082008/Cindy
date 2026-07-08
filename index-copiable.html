@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Florece — Combo Bienestar Exclusivo | Belleza Radiante y Salud Íntima Sostenida</title>
+<meta name="description" content="Combo Bienestar Exclusivo: aceite after-shave Soft Serve y probiótico vaginal URO. Belleza radiante y salud íntima sostenida, en tres packs pensados para tu rutina diaria.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fraunces:ital,wght@0,400;0,600;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   FLORECE — Combo Bienestar Exclusivo
+   style.css — tokens, layout, componentes y animaciones
+   ========================================================= */
+
+:root{
+  --cream:#FFF6F1;
+  --blush:#FFD9E3;
+  --blush-soft:#FFE9EE;
+  --lavender:#F1E6FB;
+  --rose:#E8608A;
+  --berry:#A81F53;
+  --berry-dark:#7A1640;
+  --gold:#C99553;
+  --gold-light:#E8C793;
+  --plum:#3A2233;
+  --plum-soft:#6B4A5A;
+  --white:#FFFFFF;
+  --shadow: 0 20px 50px -20px rgba(168,31,83,0.35);
+  --bg:#FFF6F1;
+  --surface:#FFFFFF;
+  --text:#3A2233;
+  --text-soft:#6B4A5A;
+  --header-bg: rgba(255,246,241,0.7);
+  --border-soft: rgba(168,31,83,0.12);
+}
+
+[data-theme="dark"]{
+  --bg:#241019;
+  --surface:#33162454;
+  --surface:#3A1B28;
+  --text:#FBEAF0;
+  --text-soft:#E3B9C9;
+  --cream:#241019;
+  --blush-soft:#3A1B28;
+  --header-bg: rgba(36,16,25,0.7);
+  --border-soft: rgba(255,255,255,0.08);
+  --shadow: 0 20px 50px -20px rgba(0,0,0,0.6);
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Manrope', sans-serif;
+  overflow-x:hidden;
+  transition:background .4s ease, color .4s ease;
+}
+h1,h2,h3,.headline{ font-family:'Baloo 2', sans-serif; font-weight:800; }
+.accent-serif{ font-family:'Fraunces', serif; font-style:italic; font-weight:500; }
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; }
+img{ max-width:100%; display:block; }
+section{ position:relative; z-index:2; }
+.container{ max-width:1200px; margin:0 auto; padding:0 6vw; }
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,0.55);
+  border:1px solid rgba(168,31,83,0.25);
+  padding:6px 16px; border-radius:999px;
+  font-size:0.78rem; letter-spacing:1.5px; text-transform:uppercase;
+  font-weight:700; color:var(--berry-dark);
+}
+[data-theme="dark"] .eyebrow{ background:rgba(255,255,255,0.06); color:var(--gold-light); }
+
+.section-head{ text-align:center; max-width:640px; margin:0 auto 54px; }
+.section-head h2{ font-size:clamp(1.9rem,4vw,2.7rem); color:var(--berry-dark); margin:14px 0 12px; }
+[data-theme="dark"] .section-head h2{ color:var(--gold-light); }
+.section-head p{ color:var(--text-soft); font-size:1.02rem; line-height:1.6; }
+
+/* ---------- scroll reveal ---------- */
+.reveal{ opacity:0; transform:translateY(34px); transition:opacity .8s ease, transform .8s ease; }
+.reveal.in{ opacity:1; transform:translateY(0); }
+.reveal.zoom{ transform:scale(.92); }
+.reveal.zoom.in{ transform:scale(1); }
+.reveal.left{ transform:translateX(-40px); }
+.reveal.left.in{ transform:translateX(0); }
+.reveal.right{ transform:translateX(40px); }
+.reveal.right.in{ transform:translateX(0); }
+
+/* ---------- loader ---------- */
+#loader{
+  position:fixed; inset:0; z-index:999;
+  background:linear-gradient(160deg, var(--blush), var(--lavender));
+  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:18px;
+  transition:opacity .6s ease, visibility .6s ease;
+}
+#loader.hide{ opacity:0; visibility:hidden; }
+.loader-flower{
+  width:64px; height:64px;
+  animation:spin 1.4s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+.loader-text{ font-family:'Baloo 2'; font-weight:700; color:var(--berry-dark); letter-spacing:1px; }
+
+/* ---------- scroll progress bar ---------- */
+#progress-bar{
+  position:fixed; top:0; left:0; height:3px; width:0%;
+  background:linear-gradient(90deg, var(--rose), var(--gold));
+  z-index:1000;
+}
+
+/* ---------- animated background ---------- */
+#bg-animated{
+  position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;
+  background:linear-gradient(125deg, var(--blush) 0%, var(--lavender) 35%, var(--cream) 70%, var(--blush-soft) 100%);
+  background-size:300% 300%;
+  animation:gradientShift 22s ease infinite;
+}
+[data-theme="dark"] #bg-animated{
+  background:linear-gradient(125deg, #2E1522 0%, #241326 35%, #241019 70%, #33182A 100%);
+  background-size:300% 300%;
+}
+@keyframes gradientShift{
+  0%{ background-position:0% 50%; }
+  50%{ background-position:100% 50%; }
+  100%{ background-position:0% 50%; }
+}
+.blur-circle{
+  position:absolute; border-radius:50%; filter:blur(60px); opacity:.45;
+  animation:floatSlow 16s ease-in-out infinite;
+}
+.blur-circle.c1{ width:340px; height:340px; background:var(--rose); top:-6%; left:-8%; }
+.blur-circle.c2{ width:280px; height:280px; background:var(--gold-light); bottom:5%; right:-6%; animation-delay:-6s; }
+.blur-circle.c3{ width:220px; height:220px; background:#C9A8F2; top:40%; left:48%; animation-delay:-11s; }
+@keyframes floatSlow{
+  0%,100%{ transform:translate(0,0); }
+  50%{ transform:translate(30px,-30px); }
+}
+.petal, .heart-float, .sparkle{ position:absolute; top:-40px; opacity:.85; will-change:transform; }
+.petal{ animation:fall linear infinite; }
+.heart-float{ animation:driftUp linear infinite; opacity:.6; }
+.sparkle{ animation:twinkle ease-in-out infinite; }
+@keyframes fall{
+  0%{ transform:translateY(-10vh) translateX(0) rotate(0deg); opacity:0; }
+  10%{ opacity:.9; }
+  100%{ transform:translateY(110vh) translateX(40px) rotate(220deg); opacity:0; }
+}
+@keyframes driftUp{
+  0%{ transform:translateY(10vh) translateX(0) scale(.8); opacity:0; }
+  15%{ opacity:.7; }
+  100%{ transform:translateY(-110vh) translateX(-30px) scale(1.1); opacity:0; }
+}
+@keyframes twinkle{
+  0%,100%{ opacity:0; transform:scale(.6); }
+  50%{ opacity:1; transform:scale(1); }
+}
+
+/* ---------- header ---------- */
+header{
+  position:sticky; top:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 6vw;
+  background:var(--header-bg);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom:1px solid var(--border-soft);
+  transition:padding .3s ease, background .3s ease;
+}
+header.shrink{ padding:11px 6vw; }
+.logo{ display:flex; align-items:center; gap:12px; }
+.logo-mark{
+  width:42px; height:42px; border-radius:14px;
+  background:linear-gradient(150deg, var(--rose), var(--berry));
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 16px -8px rgba(168,31,83,0.5); flex-shrink:0;
+}
+.wordmark{ display:flex; flex-direction:column; line-height:1.1; }
+.wordmark .name{ font-family:'Baloo 2'; font-weight:800; font-size:1.3rem; color:var(--berry-dark); }
+[data-theme="dark"] .wordmark .name{ color:var(--gold-light); }
+.wordmark .domain{ font-family:'Manrope'; font-weight:600; font-size:0.7rem; color:var(--rose); letter-spacing:1px; }
+
+nav.main-nav{ display:none; align-items:center; gap:30px; }
+nav.main-nav a{
+  font-size:0.92rem; font-weight:700; color:var(--text-soft); position:relative; padding:4px 0;
+}
+nav.main-nav a::after{
+  content:""; position:absolute; left:0; bottom:-3px; width:0; height:2px; background:var(--berry);
+  transition:width .25s ease;
+}
+nav.main-nav a:hover::after{ width:100%; }
+nav.main-nav a:hover{ color:var(--berry-dark); }
+
+.header-actions{ display:flex; align-items:center; gap:14px; }
+.icon-btn{
+  width:38px; height:38px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(255,255,255,0.5); border:1px solid var(--border-soft);
+  cursor:pointer; transition:transform .2s ease;
+  color: var(--berry-dark);
+}
+[data-theme="dark"] .icon-btn{ background:rgba(255,255,255,0.06); }
+.icon-btn:hover{ transform:scale(1.08); }
+.icon-btn svg{ pointer-events:none; }
+.icon-sun{ display:none; }
+[data-theme="dark"] .icon-moon{ display:none; }
+[data-theme="dark"] .icon-sun{ display:block; }
+
+.btn-shine{ position:relative; overflow:hidden; }
+.btn-shine::before{
+  content:""; position:absolute; top:0; left:-60%; width:40%; height:100%;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent);
+  transform:skewX(-20deg); transition:left .6s ease;
+}
+.btn-shine:hover::before{ left:120%; }
+
+.cta-small{
+  background:var(--berry); color:#fff; padding:11px 24px; border-radius:999px;
+  font-weight:700; font-size:0.88rem; box-shadow:0 8px 20px -8px rgba(168,31,83,0.6);
+  transition:transform .25s ease;
+}
+.cta-small:hover{ transform:translateY(-2px); }
+
+.burger{ display:flex; flex-direction:column; gap:5px; cursor:pointer; }
+.burger span{ width:24px; height:2.5px; background:var(--berry-dark); border-radius:2px; }
+.mobile-nav{
+  display:none; flex-direction:column; gap:2px; position:fixed; top:0; right:0; height:100vh; width:78vw; max-width:320px;
+  background:var(--surface); z-index:200; padding:90px 30px; box-shadow:-10px 0 40px rgba(0,0,0,.15);
+  transform:translateX(100%); transition:transform .35s ease;
+}
+.mobile-nav.open{ transform:translateX(0); }
+.mobile-nav a{ padding:14px 0; font-weight:700; border-bottom:1px solid var(--border-soft); color:var(--text); }
+.mobile-close{ position:absolute; top:28px; right:26px; font-size:1.6rem; cursor:pointer; color:var(--berry-dark); }
+@media (min-width:900px){
+  nav.main-nav{ display:flex; }
+  .burger{ display:none; }
+}
+
+/* ---------- scallop divider ---------- */
+.scallop{ width:100%; height:34px; position:relative; z-index:2;
+  background: radial-gradient(circle at 10px 0, transparent 12px, var(--cream) 13px) 0 -12px / 28px 24px repeat-x; }
+.scallop.to-blush{ background: radial-gradient(circle at 10px 0, transparent 12px, var(--blush-soft) 13px) 0 -12px / 28px 24px repeat-x; }
+.scallop.to-berry{ background: radial-gradient(circle at 10px 0, transparent 12px, var(--berry) 13px) 0 -12px / 28px 24px repeat-x; }
+.scallop.flip{ transform:scaleY(-1); }
+
+/* ---------- hero ---------- */
+.hero{ padding:70px 6vw 90px; text-align:center; }
+.hero-content{
+  display:flex; align-items:center; justify-content:center; gap:56px;
+  max-width:1200px; margin:0 auto; flex-wrap:wrap;
+}
+.hero-left, .hero-right{ flex:1 1 300px; }
+.hero-center{ flex:1.4 1 420px; text-align:center; }
+.hero h1{
+  font-size:clamp(2.1rem, 5vw, 3.6rem); line-height:1.08; margin:18px 0 16px;
+  background:linear-gradient(180deg, var(--berry) 20%, var(--rose) 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+[data-theme="dark"] .hero h1{ background:linear-gradient(180deg, var(--gold-light) 10%, var(--rose) 100%); -webkit-background-clip:text; background-clip:text;}
+.hero .sub{ font-family:'Fraunces'; font-style:italic; font-weight:500; font-size:clamp(1rem,2vw,1.3rem); color:var(--berry-dark); margin-bottom:16px; }
+[data-theme="dark"] .hero .sub{ color:var(--gold-light); }
+.hero .desc{ color:var(--text-soft); font-size:0.98rem; line-height:1.7; max-width:520px; margin:0 auto 30px; }
+.hero-ctas{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:20px; }
+.btn-primary{
+  background:var(--berry); color:#fff; padding:16px 34px; border-radius:999px; font-weight:700; font-size:1rem;
+  box-shadow:var(--shadow); display:inline-block; transition:transform .25s ease;
+}
+.btn-primary:hover{ transform:translateY(-3px); }
+.btn-ghost{
+  padding:16px 30px; border-radius:999px; font-weight:700; font-size:1rem; border:2px solid var(--berry);
+  color:var(--berry-dark); transition:background .25s ease, color .25s ease;
+}
+[data-theme="dark"] .btn-ghost{ color:var(--gold-light); border-color:var(--gold-light); }
+.btn-ghost:hover{ background:var(--berry); color:#fff; }
+.stars{ display:flex; align-items:center; justify-content:center; gap:8px; color:var(--berry-dark); font-weight:700; font-size:0.9rem; }
+[data-theme="dark"] .stars{ color:var(--gold-light); }
+.stars .icons{ color:var(--gold); font-size:1.1rem; letter-spacing:2px; }
+
+.hero-photo{ position:relative; }
+.hero-photo img{
+  border-radius:28px; box-shadow:0 30px 60px -20px rgba(168,31,83,0.45);
+  border:6px solid var(--white); animation:floatY 5s ease-in-out infinite;
+}
+@keyframes floatY{ 0%,100%{ transform:translateY(0) rotate(-1.5deg);} 50%{ transform:translateY(-14px) rotate(1deg);} }
+
+.hero-products{ display:flex; flex-direction:column; gap:14px; }
+.hero-product-chip{
+  display:flex; align-items:center; gap:12px; background:rgba(255,255,255,.6); border:1px solid var(--border-soft);
+  padding:12px 16px; border-radius:16px; backdrop-filter:blur(8px); text-align:left; animation:floatY 6s ease-in-out infinite;
+}
+[data-theme="dark"] .hero-product-chip{ background:rgba(255,255,255,.05); }
+.hero-product-chip:nth-child(2){ animation-delay:-2s; }
+.hero-product-chip .dot{ width:10px; height:10px; border-radius:50%; background:var(--rose); flex-shrink:0; }
+.hero-product-chip strong{ display:block; font-size:0.9rem; }
+.hero-product-chip span{ font-size:0.78rem; color:var(--text-soft); }
+
+/* ---------- benefits ---------- */
+.benefits{ padding:80px 0 60px; }
+.benefit-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:26px; }
+.benefit-card{
+  background:var(--surface); border-radius:22px; padding:30px 26px; text-align:left;
+  box-shadow:0 14px 30px -18px rgba(58,34,51,0.25); transition:transform .3s ease, box-shadow .3s ease;
+}
+.benefit-card:hover{ transform:translateY(-8px); box-shadow:0 22px 40px -18px rgba(168,31,83,0.3); }
+.benefit-card .ico{
+  width:52px; height:52px; border-radius:16px; background:var(--blush); display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+}
+[data-theme="dark"] .benefit-card .ico{ background:rgba(255,255,255,.08); }
+.benefit-card h3{ font-size:1.05rem; color:var(--berry-dark); margin-bottom:8px; }
+[data-theme="dark"] .benefit-card h3{ color:var(--gold-light); }
+.benefit-card p{ font-size:0.88rem; color:var(--text-soft); line-height:1.55; }
+
+/* ---------- products / packs ---------- */
+.packs{ padding:80px 0 40px; }
+.pack-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; align-items:stretch; }
+.pack-card{
+  background:var(--surface); border-radius:26px; padding:34px 28px; display:flex; flex-direction:column;
+  position:relative; box-shadow:0 18px 40px -24px rgba(58,34,51,0.3); transition:transform .3s ease, box-shadow .3s ease;
+}
+.pack-card:hover{ transform:translateY(-6px); }
+.pack-card.featured{
+  background:linear-gradient(160deg, var(--berry) 0%, var(--berry-dark) 100%); color:#fff; transform:scale(1.05);
+  box-shadow:0 26px 55px -20px rgba(168,31,83,0.55);
+}
+.pack-card.featured:hover{ transform:scale(1.05) translateY(-6px); }
+.ribbon{
+  position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:var(--gold); color:#fff;
+  font-size:0.7rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; padding:7px 16px; border-radius:999px;
+  box-shadow:0 8px 16px -6px rgba(201,149,83,0.6); white-space:nowrap; animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{ 0%,100%{ transform:translateX(-50%) scale(1);} 50%{ transform:translateX(-50%) scale(1.06);} }
+.badge-value{
+  position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:var(--berry-dark); color:#fff;
+  font-size:0.7rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; padding:7px 16px; border-radius:999px;
+}
+.pack-size{ font-size:0.75rem; letter-spacing:1.5px; text-transform:uppercase; font-weight:700; opacity:.75; margin-bottom:4px; }
+.pack-card h3{ font-size:1.4rem; margin-bottom:6px; }
+.pack-card.featured .pack-size{ color:var(--blush); opacity:1; }
+.pack-desc{ font-size:0.88rem; line-height:1.55; margin-bottom:16px; opacity:.9; }
+.pack-tag{
+  display:inline-block; background:var(--blush); color:var(--berry-dark); font-weight:800; font-size:0.78rem;
+  padding:6px 14px; border-radius:999px; margin-bottom:16px; width:fit-content;
+}
+.pack-card.featured .pack-tag{ background:rgba(255,255,255,.16); color:#fff; }
+.pack-includes{ margin-bottom:22px; flex-grow:1; }
+.pack-includes li{ display:flex; gap:9px; font-size:0.86rem; margin-bottom:9px; align-items:flex-start; }
+.pack-includes li svg{ flex-shrink:0; margin-top:2px; }
+.pack-card:not(.featured) .pack-includes li svg path{ stroke:var(--rose); }
+.pack-card.featured .pack-includes li svg path{ stroke:var(--blush); }
+.btn-pack{
+  text-align:center; padding:13px 0; border-radius:999px; font-weight:700; font-size:0.92rem;
+  border:2px solid var(--berry); color:var(--berry-dark); transition:background .25s ease, color .25s ease;
+}
+[data-theme="dark"] .pack-card:not(.featured) .btn-pack{ color:var(--gold-light); border-color:var(--gold-light); }
+.btn-pack:hover{ background:var(--berry); color:#fff; }
+.pack-card.featured .btn-pack{ border:2px solid #fff; color:#fff; }
+.pack-card.featured .btn-pack:hover{ background:#fff; color:var(--berry-dark); }
+
+.compare-toggle{ text-align:center; margin-top:44px; }
+.compare-toggle button{
+  background:none; border:2px dashed var(--berry); color:var(--berry-dark); padding:10px 22px; border-radius:999px;
+  font-weight:700; cursor:pointer; font-family:'Manrope'; font-size:0.9rem;
+}
+[data-theme="dark"] .compare-toggle button{ color:var(--gold-light); border-color:var(--gold-light); }
+.compare-table-wrap{ max-height:0; overflow:hidden; transition:max-height .5s ease; margin-top:0; }
+.compare-table-wrap.open{ max-height:600px; margin-top:30px; }
+table.compare{ width:100%; border-collapse:collapse; background:var(--surface); border-radius:18px; overflow:hidden; box-shadow:0 14px 30px -18px rgba(58,34,51,.25); }
+table.compare th, table.compare td{ padding:14px 16px; text-align:center; font-size:0.86rem; border-bottom:1px solid var(--border-soft); }
+table.compare th{ background:var(--blush); color:var(--berry-dark); font-family:'Baloo 2'; }
+[data-theme="dark"] table.compare th{ background:rgba(255,255,255,.06); color:var(--gold-light); }
+table.compare td:first-child, table.compare th:first-child{ text-align:left; font-weight:700; }
+
+/* ---------- ingredients ---------- */
+.ingredients{ padding:80px 0; }
+.ing-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:24px; }
+.ing-card{
+  background:var(--surface); border-radius:22px; padding:30px 24px; text-align:center;
+  box-shadow:0 14px 30px -18px rgba(58,34,51,.2); transition:transform .3s ease;
+}
+.ing-card:hover{ transform:translateY(-6px); }
+.ing-emoji{ font-size:2.4rem; margin-bottom:14px; }
+.ing-card h3{ font-size:1.05rem; color:var(--berry-dark); margin-bottom:8px; }
+[data-theme="dark"] .ing-card h3{ color:var(--gold-light); }
+.ing-card p{ font-size:0.86rem; color:var(--text-soft); line-height:1.55; }
+
+/* ---------- testimonials carousel ---------- */
+.testimonials{ padding:80px 0; background:var(--blush-soft); overflow:hidden; }
+.carousel{ position:relative; max-width:720px; margin:0 auto; }
+.carousel-track{ display:flex; transition:transform .6s ease; }
+.testi-card{
+  flex:0 0 100%; background:var(--surface); border-radius:24px; padding:38px 34px; text-align:center;
+  box-shadow:0 18px 36px -20px rgba(58,34,51,.25);
+}
+.testi-avatar{
+  width:60px; height:60px; border-radius:50%; margin:0 auto 14px; background:linear-gradient(150deg,var(--rose),var(--gold));
+  display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Baloo 2'; font-weight:700; font-size:1.2rem;
+}
+.testi-card p.quote{ font-family:'Fraunces'; font-style:italic; font-size:1.08rem; line-height:1.6; margin-bottom:16px; color:var(--text); }
+.testi-card .stars{ justify-content:center; margin-bottom:10px; }
+.testi-name{ font-weight:800; }
+.testi-city{ font-size:0.8rem; color:var(--text-soft); }
+.carousel-dots{ display:flex; justify-content:center; gap:9px; margin-top:26px; }
+.carousel-dots button{ width:9px; height:9px; border-radius:50%; border:none; background:var(--border-soft); cursor:pointer; padding:0; }
+.carousel-dots button.active{ background:var(--berry); width:22px; border-radius:6px; transition:width .3s ease; }
+.carousel-arrow{
+  position:absolute; top:50%; transform:translateY(-50%); background:var(--surface); border:1px solid var(--border-soft);
+  width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:5;
+}
+.carousel-arrow.prev{ left:-10px; } .carousel-arrow.next{ right:-10px; }
+@media(min-width:820px){ .carousel-arrow.prev{ left:-52px; } .carousel-arrow.next{ right:-52px; } }
+
+/* ---------- stats ---------- */
+.stats{ padding:70px 0; background:linear-gradient(160deg, var(--berry), var(--berry-dark)); color:#fff; text-align:center; }
+.stats-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:30px; }
+.stat-num{ font-family:'Baloo 2'; font-weight:800; font-size:clamp(2rem,4vw,2.8rem); }
+.stat-label{ font-size:0.86rem; opacity:.9; margin-top:6px; }
+
+/* ---------- gallery ---------- */
+.gallery{ padding:80px 0; }
+.gallery-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; }
+.gallery-item{ border-radius:20px; overflow:hidden; position:relative; cursor:pointer; box-shadow:0 14px 30px -18px rgba(58,34,51,.25); aspect-ratio:4/5; }
+.gallery-item img, .gallery-item .fill{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+.gallery-item .fill{ display:flex; align-items:center; justify-content:center; font-family:'Baloo 2'; color:#fff; text-align:center; padding:16px; font-size:1.05rem; }
+.gallery-item:hover img, .gallery-item:hover .fill{ transform:scale(1.08); }
+.gallery-item::after{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(168,31,83,.35), transparent 45%); opacity:0; transition:opacity .3s ease; }
+.gallery-item:hover::after{ opacity:1; }
+#lightbox{
+  position:fixed; inset:0; background:rgba(58,34,51,.88); z-index:500; display:none; align-items:center; justify-content:center; padding:30px;
+}
+#lightbox.open{ display:flex; }
+#lightbox img{ max-width:min(90vw,600px); max-height:85vh; border-radius:16px; box-shadow:0 30px 60px rgba(0,0,0,.4); }
+#lightbox-close{ position:absolute; top:26px; right:30px; color:#fff; font-size:2rem; cursor:pointer; }
+
+/* ---------- FAQ ---------- */
+.faq{ padding:80px 0; }
+.faq-list{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
+.faq-item{ background:var(--surface); border-radius:18px; padding:6px 24px; box-shadow:0 10px 24px -18px rgba(58,34,51,.2); }
+.faq-q{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; cursor:pointer; font-weight:700; }
+.faq-q .plus{ font-size:1.3rem; color:var(--berry); transition:transform .3s ease; flex-shrink:0; margin-left:14px; }
+.faq-item.open .faq-q .plus{ transform:rotate(45deg); }
+.faq-a{ max-height:0; overflow:hidden; transition:max-height .4s ease; }
+.faq-item.open .faq-a{ max-height:300px; }
+.faq-a p{ padding-bottom:20px; color:var(--text-soft); font-size:0.9rem; line-height:1.65; }
+
+/* ---------- countdown ---------- */
+.countdown{ padding:44px 0; background:var(--blush); text-align:center; }
+[data-theme="dark"] .countdown{ background:rgba(255,255,255,.05); }
+.countdown h3{ font-family:'Baloo 2'; color:var(--berry-dark); font-size:1.3rem; margin-bottom:16px; }
+[data-theme="dark"] .countdown h3{ color:var(--gold-light); }
+.countdown-timer{ display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
+.countdown-unit{ background:var(--surface); border-radius:16px; padding:14px 20px; min-width:76px; box-shadow:0 10px 20px -14px rgba(58,34,51,.3); }
+.countdown-unit .num{ font-family:'Baloo 2'; font-weight:800; font-size:1.6rem; color:var(--berry); }
+.countdown-unit .lbl{ font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-soft); }
+
+/* ---------- contact ---------- */
+.contact{ padding:90px 0 100px; text-align:center; }
+.contact-box{
+  max-width:560px; margin:0 auto; background:rgba(255,255,255,.55); backdrop-filter:blur(16px);
+  border:1px solid var(--border-soft); border-radius:26px; padding:38px; text-align:left; box-shadow:0 24px 50px -26px rgba(58,34,51,.35);
+}
+[data-theme="dark"] .contact-box{ background:rgba(255,255,255,.04); }
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:520px){ .form-row{ grid-template-columns:1fr; } }
+.contact-box label{ display:block; font-size:0.8rem; font-weight:700; color:var(--berry-dark); margin-bottom:6px; margin-top:14px; }
+[data-theme="dark"] .contact-box label{ color:var(--gold-light); }
+.contact-box input, .contact-box textarea{
+  width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid var(--blush); font-family:'Manrope';
+  font-size:0.92rem; background:var(--cream); color:var(--text);
+}
+[data-theme="dark"] .contact-box input, [data-theme="dark"] .contact-box textarea{ border-color:rgba(255,255,255,.12); }
+.contact-box input:focus, .contact-box textarea:focus{ outline:2px solid var(--rose); outline-offset:1px; }
+.contact-box textarea{ resize:vertical; min-height:80px; }
+.field-error{ color:var(--berry); font-size:0.76rem; margin-top:4px; display:none; }
+.field-error.show{ display:block; }
+.contact-box button{
+  margin-top:24px; width:100%; background:var(--berry); color:#fff; border:none; padding:15px 0; border-radius:999px;
+  font-weight:700; font-size:1rem; cursor:pointer; box-shadow:var(--shadow); transition:transform .25s ease; font-family:'Manrope';
+}
+.contact-box button:hover{ transform:translateY(-2px); }
+.form-msg{ text-align:center; margin-top:16px; font-weight:700; font-size:0.88rem; color:var(--berry-dark); display:none; }
+.form-msg.show{ display:block; }
+
+.direct-contact{ display:flex; justify-content:center; gap:26px; flex-wrap:wrap; margin-top:30px; }
+.direct-contact a{ display:flex; align-items:center; gap:9px; font-weight:700; font-size:0.95rem; color:var(--berry-dark); border-bottom:2px solid transparent; padding:6px 0; transition:border-color .2s ease; }
+[data-theme="dark"] .direct-contact a{ color:var(--gold-light); }
+.direct-contact a:hover{ border-color:var(--rose); }
+
+/* ---------- footer ---------- */
+footer{ background:var(--berry-dark); color:#fff; padding:60px 6vw 26px; }
+.footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:34px; max-width:1200px; margin:0 auto 40px; }
+@media(max-width:820px){ .footer-grid{ grid-template-columns:repeat(2,1fr); } }
+.footer-grid h4{ font-family:'Baloo 2'; margin-bottom:16px; font-size:1rem; }
+.footer-grid ul li{ margin-bottom:10px; font-size:0.86rem; opacity:.85; }
+.footer-grid ul li a:hover{ text-decoration:underline; }
+.footer-brand p{ font-size:0.86rem; opacity:.8; line-height:1.6; margin-top:10px; max-width:280px; }
+.social-row{ display:flex; gap:10px; margin-top:16px; }
+.social-row a{
+  width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center;
+  transition:transform .25s ease, background .25s ease;
+}
+.social-row a:hover{ background:var(--gold); transform:translateY(-3px); }
+.footer-bottom{ border-top:1px solid rgba(255,255,255,.15); padding-top:22px; text-align:center; font-size:0.78rem; opacity:.75; }
+
+/* ---------- floating buttons ---------- */
+#whatsapp-float{
+  position:fixed; bottom:26px; right:26px; z-index:300; width:58px; height:58px; border-radius:50%;
+  background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 12px 26px -8px rgba(0,0,0,.4);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+#back-to-top{
+  position:fixed; bottom:26px; right:96px; z-index:300; width:50px; height:50px; border-radius:50%;
+  background:var(--surface); border:1px solid var(--border-soft); display:none; align-items:center; justify-content:center;
+  box-shadow:0 12px 26px -10px rgba(58,34,51,.3); cursor:pointer; color:var(--berry-dark);
+}
+#back-to-top.show{ display:flex; }
+
+@media (max-width:880px){
+  .benefit-grid, .ing-grid{ grid-template-columns:1fr; }
+  .pack-grid{ grid-template-columns:1fr; }
+  .pack-card.featured{ transform:none; order:-1; }
+  .pack-card.featured:hover{ transform:translateY(-6px); }
+  .hero-content{ flex-direction:column; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *{ animation:none !important; transition:none !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===== Loader ===== -->
+<div id="loader">
+  <svg class="loader-flower" viewBox="0 0 24 24" fill="none">
+    <path d="M12 12c0-3 2-4.5 2-7.5C14 2.5 13 2 12 2s-2 .5-2 2.5c0 3 2 4.5 2 7.5z" fill="#E8608A"/>
+    <path d="M12 12c2.6-1.5 4.4-1 6.8.6 1.7 1.1 2.2 2 2.2 2.9-1 .3-2 .1-3.6-.7-2.6-1.4-4-2.6-5.4-2.8z" fill="#E8608A"/>
+    <path d="M12 12c-2.6-1.5-4.4-1-6.8.6C3.5 13.7 3 14.6 3 15.5c1 .3 2 .1 3.6-.7 2.6-1.4 4-2.6 5.4-2.8z" fill="#E8608A"/>
+    <path d="M12 12c1.3 2.6 1 4.6-.3 7.2-.9 1.9-1.8 2.6-2.7 2.7-.5-.9-.6-1.9.2-3.7 1.2-2.7 2-4.2 2.8-6.2z" fill="#E8608A"/>
+    <path d="M12 12c-1.3 2.6-1 4.6.3 7.2.9 1.9 1.8 2.6 2.7 2.7.5-.9.6-1.9-.2-3.7-1.2-2.7-2-4.2-2.8-6.2z" fill="#E8608A"/>
+    <circle cx="12" cy="12" r="2.2" fill="#C99553"/>
+  </svg>
+  <span class="loader-text">Floreciendo tu experiencia…</span>
+</div>
+
+<!-- ===== Progress bar ===== -->
+<div id="progress-bar"></div>
+
+<!-- ===== Fondo animado ===== -->
+<div id="bg-animated" aria-hidden="true">
+  <div class="blur-circle c1"></div>
+  <div class="blur-circle c2"></div>
+  <div class="blur-circle c3"></div>
+</div>
+
+<!-- ===== Header ===== -->
+<header id="site-header">
+  <div class="logo">
+    <div class="logo-mark">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 12c0-3 2-4.5 2-7.5C14 2.5 13 2 12 2s-2 .5-2 2.5c0 3 2 4.5 2 7.5z" fill="#FFE9EE"/>
+        <path d="M12 12c2.6-1.5 4.4-1 6.8.6 1.7 1.1 2.2 2 2.2 2.9-1 .3-2 .1-3.6-.7-2.6-1.4-4-2.6-5.4-2.8z" fill="#FFE9EE"/>
+        <path d="M12 12c-2.6-1.5-4.4-1-6.8.6C3.5 13.7 3 14.6 3 15.5c1 .3 2 .1 3.6-.7 2.6-1.4 4-2.6 5.4-2.8z" fill="#FFE9EE"/>
+        <path d="M12 12c1.3 2.6 1 4.6-.3 7.2-.9 1.9-1.8 2.6-2.7 2.7-.5-.9-.6-1.9.2-3.7 1.2-2.7 2-4.2 2.8-6.2z" fill="#FFE9EE"/>
+        <path d="M12 12c-1.3 2.6-1 4.6.3 7.2.9 1.9 1.8 2.6 2.7 2.7.5-.9.6-1.9-.2-3.7-1.2-2.7-2-4.2-2.8-6.2z" fill="#FFE9EE"/>
+        <circle cx="12" cy="12" r="2.2" fill="#C99553"/>
+      </svg>
+    </div>
+    <div class="wordmark">
+      <span class="name">Florece</span>
+      <span class="domain">florece.bienestar</span>
+    </div>
+  </div>
+
+  <nav class="main-nav">
+    <a href="#inicio">Inicio</a>
+    <a href="#beneficios">Beneficios</a>
+    <a href="#productos">Productos</a>
+    <a href="#ingredientes">Ingredientes</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#faq">Preguntas Frecuentes</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <div class="header-actions">
+    <button class="icon-btn" id="theme-toggle" aria-label="Cambiar modo claro/oscuro">
+      <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+    <a href="#productos" class="cta-small btn-shine">Comprar Ahora</a>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+  <span class="mobile-close" id="mobile-close">&times;</span>
+  <a href="#inicio">Inicio</a>
+  <a href="#beneficios">Beneficios</a>
+  <a href="#productos">Productos</a>
+  <a href="#ingredientes">Ingredientes</a>
+  <a href="#testimonios">Testimonios</a>
+  <a href="#faq">Preguntas Frecuentes</a>
+  <a href="#contacto">Contacto</a>
+</div>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <div class="hero-left reveal left">
+      <div class="hero-products">
+        <div class="hero-product-chip">
+          <span class="dot"></span>
+          <div><strong>Aceite Soft Serve</strong><span>Vainilla, fresa e hialurónico</span></div>
+        </div>
+        <div class="hero-product-chip">
+          <span class="dot"></span>
+          <div><strong>Probiótico URO</strong><span>Equilibrio íntimo diario</span></div>
+        </div>
+        <div class="hero-product-chip">
+          <span class="dot"></span>
+          <div><strong>3 presentaciones</strong><span>Inicial, Dúo y Profesional</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-center reveal zoom">
+      <span class="eyebrow">✿ Belleza radiante &amp; salud íntima</span>
+      <h1>Combo Bienestar<br>Exclusivo</h1>
+      <p class="sub">Belleza Radiante y Salud Íntima Sostenida</p>
+      <p class="desc">El Combo Bienestar Exclusivo reúne productos cuidadosamente seleccionados para complementar tu rutina diaria de cuidado personal. Una experiencia de frescura, confianza y bienestar pensada para ayudarte a sentirte segura, cómoda y con mayor confianza cada día.</p>
+      <div class="hero-ctas">
+        <a href="#productos" class="btn-primary btn-shine">Comprar Ahora</a>
+        <a href="#beneficios" class="btn-ghost">Ver Beneficios</a>
+      </div>
+      <div class="stars">
+        <span class="icons">★★★★☆</span>
+        <span>4.5 / 5 — clientas felices</span>
+      </div>
+    </div>
+
+    <div class="hero-right hero-photo reveal right">
+      <img src="imagen.jpg" alt="Combo Bienestar Exclusivo: aceite after-shave Soft Serve y probiótico vaginal URO, con los tres packs disponibles">
+    </div>
+  </div>
+</section>
+<div class="scallop"></div>
+
+<!-- ===== Beneficios ===== -->
+<section class="benefits" id="beneficios">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✿ Por qué elegirlo</span>
+      <h2>Beneficios pensados para tu rutina</h2>
+      <p>Cada detalle del combo está diseñado para acompañarte, sin complicar tu día a día.</p>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit-card reveal">
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#A81F53" stroke-width="1.6"/><path d="M12 8v8M8 12h8" stroke="#A81F53" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Equilibrio natural</h3>
+        <p>Ayuda a mantener el equilibrio natural del organismo mediante una rutina constante de cuidado.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5" stroke="#A81F53" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Frescura prolongada</h3>
+        <p>Favorece una sensación prolongada de frescura y comodidad durante todo el día.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.2 2 4.5 5.6 4c2-.3 3.7.6 4.9 2.2C11.7 4.6 13.4 3.7 15.4 4c3.6.5 5.3 4.2 3.6 7.7C16.5 16.4 12 21 12 21z" stroke="#A81F53" stroke-width="1.6"/></svg></div>
+        <h3>Bienestar íntimo</h3>
+        <p>Contribuye al bienestar íntimo femenino como complemento de hábitos saludables.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 3c0 3-3 4-3 8a6 6 0 0 0 12 0c0-4-3-5-3-8" stroke="#A81F53" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Ingredientes seleccionados</h3>
+        <p>Elaborado con ingredientes cuidadosamente seleccionados para ofrecer una experiencia agradable.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12c2-4 6-6 8-6s6 2 8 6c-2 4-6 6-8 6s-6-2-8-6z" stroke="#A81F53" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12" r="2" stroke="#A81F53" stroke-width="1.6"/></svg></div>
+        <h3>Aroma delicado</h3>
+        <p>Aroma suave y delicado, inspirado en frutas y flores naturales.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" stroke="#A81F53" stroke-width="1.6"/><path d="M8 12h8M12 8v8" stroke="#A81F53" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Presentación elegante</h3>
+        <p>Presentación elegante y fácil de utilizar, lista para incorporarse a tu rutina diaria.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 12h4l2-7 4 14 2-7h6" stroke="#A81F53" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Fácil de incorporar</h3>
+        <p>Ideal para quienes buscan sumar productos de cuidado personal a su rutina diaria sin esfuerzo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Productos / Packs ===== -->
+<div class="scallop to-blush"></div>
+<section class="packs" id="productos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✿ Elige tu ritual</span>
+      <h2>Packs del Combo Bienestar</h2>
+      <p>Los tres incluyen el aceite Soft Serve y el probiótico URO. Escríbenos para precio y disponibilidad.</p>
+    </div>
+
+    <div class="pack-grid">
+      <div class="pack-card reveal">
+        <span class="pack-size">1 set</span>
+        <h3>Pack Inicial</h3>
+        <p class="pack-desc">Ideal para quienes desean conocer el producto por primera vez. Incluye un set básico para comenzar tu rutina de bienestar y cuidado personal.</p>
+        <span class="pack-tag">Ideal para principiantes</span>
+        <div class="stars" style="justify-content:flex-start; margin-bottom:16px;"><span class="icons">★★★★☆</span></div>
+        <ul class="pack-includes">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>1 aceite Soft Serve</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>1 probiótico URO</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Perfecto para empezar</li>
+        </ul>
+        <a href="#contacto" class="btn-pack">Consultar</a>
+      </div>
+
+      <div class="pack-card featured reveal zoom">
+        <span class="ribbon">Más Vendido</span>
+        <span class="pack-size">2 sets</span>
+        <h3>Oferta Más Vendida</h3>
+        <p class="pack-desc">La mejor relación entre cantidad y precio: mayor ahorro y una experiencia más completa. Preferido por miles de clientes.</p>
+        <span class="pack-tag">Ahorra 30% + Envío Gratis</span>
+        <div class="stars" style="justify-content:flex-start; margin-bottom:16px; color:#fff;"><span class="icons">★★★★★</span></div>
+        <ul class="pack-includes">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>2 aceites Soft Serve</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>2 probióticos URO</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Mayor duración y envío sin costo</li>
+        </ul>
+        <a href="#contacto" class="btn-pack">Quiero este</a>
+      </div>
+
+      <div class="pack-card reveal">
+        <span class="badge-value">Mejor Valor</span>
+        <span class="pack-size">3 sets</span>
+        <h3>Pack Profesional</h3>
+        <p class="pack-desc">La opción más completa para mantener una rutina constante. Incluye la mayor cantidad de producto y representa el mejor valor por compra.</p>
+        <span class="pack-tag">Máximo ahorro por set</span>
+        <div class="stars" style="justify-content:flex-start; margin-bottom:16px;"><span class="icons">★★★★★</span></div>
+        <ul class="pack-includes">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>3 aceites Soft Serve</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>3 probióticos URO</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rutina de varios meses</li>
+        </ul>
+        <a href="#contacto" class="btn-pack">Consultar</a>
+      </div>
+    </div>
+
+    <div class="compare-toggle reveal">
+      <button id="compare-toggle-btn">Comparar los 3 packs</button>
+      <div class="compare-table-wrap" id="compare-table-wrap">
+        <table class="compare">
+          <thead>
+            <tr><th>Característica</th><th>Inicial</th><th>Dúo (Más Vendido)</th><th>Profesional</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Sets incluidos</td><td>1</td><td>2</td><td>3</td></tr>
+            <tr><td>Envío gratis</td><td>—</td><td>Sí</td><td>Sí</td></tr>
+            <tr><td>Ahorro</td><td>—</td><td>30%</td><td>Máximo</td></tr>
+            <tr><td>Ideal para</td><td>Probar el ritual</td><td>Uso frecuente</td><td>Rutina prolongada</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Countdown ===== -->
+<section class="countdown reveal">
+  <h3>✿ Oferta por tiempo limitado ✿</h3>
+  <div class="countdown-timer">
+    <div class="countdown-unit"><div class="num" id="cd-days">00</div><div class="lbl">Días</div></div>
+    <div class="countdown-unit"><div class="num" id="cd-hours">00</div><div class="lbl">Horas</div></div>
+    <div class="countdown-unit"><div class="num" id="cd-min">00</div><div class="lbl">Min</div></div>
+    <div class="countdown-unit"><div class="num" id="cd-sec">00</div><div class="lbl">Seg</div></div>
+  </div>
+</section>
+
+<!-- ===== Ingredientes ===== -->
+<section class="ingredients" id="ingredientes">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✿ Lo que notarás</span>
+      <h2>Ingredientes del ritual</h2>
+      <p>Una selección pensada para el aroma, la textura y la sensación de cada uso.</p>
+    </div>
+    <div class="ing-grid">
+      <div class="ing-card reveal">
+        <div class="ing-emoji">🍓</div>
+        <h3>Fresa</h3>
+        <p>Aporta un aroma dulce y agradable, inspirado en la frescura de las frutas de temporada.</p>
+      </div>
+      <div class="ing-card reveal">
+        <div class="ing-emoji">🌸</div>
+        <h3>Vainilla</h3>
+        <p>Una fragancia suave y delicada que brinda una sensación relajante en cada aplicación.</p>
+      </div>
+      <div class="ing-card reveal">
+        <div class="ing-emoji">🥭</div>
+        <h3>Maracuyá</h3>
+        <p>Ofrece un aroma tropical refrescante que hace más agradable toda la experiencia.</p>
+      </div>
+      <div class="ing-card reveal">
+        <div class="ing-emoji">🌿</div>
+        <h3>Extractos naturales</h3>
+        <p>Ácido hialurónico y péptidos forman parte de una selección inspirada en el cuidado diario.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Testimonios ===== -->
+<section class="testimonials" id="testimonios">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✿ Lo que dicen</span>
+      <h2>Opiniones de clientas</h2>
+      <p>Historias reales de quienes ya incorporaron el ritual Florece a su rutina.</p>
+    </div>
+    <div class="carousel reveal">
+      <div class="carousel-arrow prev" id="carousel-prev">&#8249;</div>
+      <div class="carousel-arrow next" id="carousel-next">&#8250;</div>
+      <div class="carousel-track" id="carousel-track">
+        <div class="testi-card">
+          <div class="testi-avatar">M</div>
+          <div class="stars"><span class="icons">★★★★★</span></div>
+          <p class="quote">"Desde que uso el combo, mi piel se siente distinta y ya no me preocupo por mi rutina íntima. Se volvió parte de mi día."</p>
+          <div class="testi-name">María G.</div>
+          <div class="testi-city">Ciudad de Panamá</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-avatar">L</div>
+          <div class="stars"><span class="icons">★★★★★</span></div>
+          <p class="quote">"El aroma es delicado y no invasivo. El pack Dúo me duró justo lo que necesitaba y llegó rapidísimo."</p>
+          <div class="testi-name">Lucía R.</div>
+          <div class="testi-city">David, Chiriquí</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-avatar">C</div>
+          <div class="stars"><span class="icons">★★★★☆</span></div>
+          <p class="quote">"Me gustó que sea fácil de incorporar a mi rutina diaria, sin pasos complicados ni productos difíciles de usar."</p>
+          <div class="testi-name">Carla M.</div>
+          <div class="testi-city">Colón</div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="carousel-dots"></div>
+  </div>
+</section>
+
+<!-- ===== Estadísticas ===== -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="reveal zoom"><div class="stat-num" data-target="50000" data-suffix="+">0</div><div class="stat-label">Clientas satisfechas</div></div>
+      <div class="reveal zoom"><div class="stat-num" data-target="98" data-suffix="%">0</div><div class="stat-label">Recomendaciones positivas</div></div>
+      <div class="reveal zoom"><div class="stat-num" data-target="25000" data-suffix="+">0</div><div class="stat-label">Pedidos entregados</div></div>
+      <div class="reveal zoom"><div class="stat-num" data-target="15" data-suffix="">0</div><div class="stat-label">Países con presencia</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Galería ===== -->
+<section class="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✿ Galería</span>
+      <h2>El combo en detalle</h2>
+      <p>Haz clic en cualquier imagen para verla en grande.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal" data-src="imagen.jpg">
+        <img src="imagen.jpg" alt="Combo Bienestar Exclusivo completo">
+      </div>
+      <div class="gallery-item reveal">
+        <div class="fill" style="background:linear-gradient(150deg,#E8608A,#A81F53);">Pack Inicial<br>1 Set</div>
+      </div>
+      <div class="gallery-item reveal">
+        <div class="fill" style="background:linear-gradient(150deg,#C99553,#A81F53);">Oferta Más Vendida<br>2 Sets</div>
+      </div>
+      <div class="gallery-item reveal">
+        <div class="fill" style="background:linear-gradient(150deg,#F1E6FB,#E8608A); color:#3A2233;">Pack Profesional<br>3 Sets</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <span id="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="Vista ampliada del producto">
+</div>
+
+<!-- ===== FAQ ===== -->
+<div class="scallop to-blush"></div>
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✿ Dudas frecuentes</span>
+      <h2>Preguntas Frecuentes</h2>
+      <p>Todo lo que necesitas saber antes de pedir tu combo.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>¿Qué incluye exactamente cada pack?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>Cada pack incluye la misma combinación de productos —aceite after-shave Soft Serve y probiótico vaginal URO— en distintas cantidades: 1 set en el Pack Inicial, 2 sets en la Oferta Más Vendida y 3 sets en el Pack Profesional.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>¿Cuánto tarda el envío?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>Los tiempos de entrega varían según tu ubicación. Al escribirnos por WhatsApp o correo te confirmamos el tiempo estimado exacto para tu zona.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>¿Qué formas de pago aceptan?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>Aceptamos los métodos de pago habituales en Panamá. Escríbenos y te compartimos las opciones disponibles según tu forma de pago preferida.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>¿El envío tiene costo?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>La Oferta Más Vendida (2 sets) y el Pack Profesional (3 sets) incluyen envío sin costo adicional. Para el Pack Inicial, consulta el costo de envío según tu ubicación.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>¿Cómo los contacto si tengo dudas?</span><span class="plus">+</span></div>
+        <div class="faq-a"><p>Puedes escribirnos por WhatsApp al 507 6690 2086, por correo a cindybeitar@gmail.com, o llenar el formulario de contacto al final de esta página.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contacto ===== -->
+<section class="contact" id="contacto">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✿ Hablemos</span>
+      <h2>Solicita información</h2>
+      <p>Cuéntanos qué pack prefieres y te respondemos con precio, disponibilidad y forma de pago.</p>
+    </div>
+
+    <form class="contact-box reveal" id="contact-form" action="mailto:cindybeitar@gmail.com" method="post" enctype="text/plain" novalidate>
+      <div class="form-row">
+        <div>
+          <label for="f-name">Nombre completo</label>
+          <input type="text" id="f-name" name="Nombre">
+          <span class="field-error" id="f-name-error">Por favor escribe tu nombre.</span>
+        </div>
+        <div>
+          <label for="f-email">Correo electrónico</label>
+          <input type="email" id="f-email" name="Correo">
+          <span class="field-error" id="f-email-error">Escribe un correo válido.</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="f-phone">Teléfono</label>
+          <input type="tel" id="f-phone" name="Telefono">
+          <span class="field-error" id="f-phone-error">Escribe un teléfono válido.</span>
+        </div>
+        <div>
+          <label for="f-city">Ciudad</label>
+          <input type="text" id="f-city" name="Ciudad">
+          <span class="field-error" id="f-city-error">Escribe tu ciudad.</span>
+        </div>
+      </div>
+      <label for="f-message">Mensaje</label>
+      <textarea id="f-message" name="Mensaje" placeholder="Cuéntanos qué pack te interesa"></textarea>
+      <span class="field-error" id="f-message-error">Cuéntanos un poco más en tu mensaje.</span>
+
+      <button type="submit">Solicitar Información</button>
+      <div class="form-msg" id="form-msg"></div>
+    </form>
+
+    <div class="direct-contact reveal">
+      <a href="tel:+50766902086">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1.1L6.6 10.8z" stroke="#A81F53" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        507 6690 2086
+      </a>
+      <a href="mailto:cindybeitar@gmail.com">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="#A81F53" stroke-width="1.6"/><path d="m4 6.5 8 6 8-6" stroke="#A81F53" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        cindybeitar@gmail.com
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-mark">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.2" fill="#C99553"/><path d="M12 12c0-3 2-4.5 2-7.5C14 2.5 13 2 12 2s-2 .5-2 2.5c0 3 2 4.5 2 7.5z" fill="#FFE9EE"/></svg>
+        </div>
+        <div class="wordmark"><span class="name" style="color:#fff;">Florece</span><span class="domain" style="color:#F3C8D6;">florece.bienestar</span></div>
+      </div>
+      <p>Belleza radiante y salud íntima sostenida, en un ritual diario pensado para ti.</p>
+      <div class="social-row">
+        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 9h3V6h-3c-2 0-3 1.3-3 3v2H9v3h2v6h3v-6h2.5l.5-3H14V9.5c0-.3.2-.5.5-.5z" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg></a>
+        <a href="https://wa.me/50766902086" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1.1L6.6 10.8z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h4>Enlaces rápidos</h4>
+      <ul>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#ingredientes">Ingredientes</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ayuda</h4>
+      <ul>
+        <li><a href="#faq">Preguntas frecuentes</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Términos y condiciones</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li>507 6690 2086</li>
+        <li>cindybeitar@gmail.com</li>
+        <li>Panamá</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Florece — Combo Bienestar Exclusivo. Todos los derechos reservados.</div>
+</footer>
+
+<!-- ===== Floating buttons ===== -->
+<a href="https://wa.me/50766902086" id="whatsapp-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1.1L6.6 10.8z" fill="#fff"/></svg>
+</a>
+<button id="back-to-top" aria-label="Volver al inicio">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+/* =========================================================
+   FLORECE — Combo Bienestar Exclusivo
+   script.js — interactividad
+   ========================================================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------- Loader ---------- */
+  const loader = document.getElementById('loader');
+  window.addEventListener('load', () => {
+    setTimeout(() => loader.classList.add('hide'), 400);
+  });
+
+  /* ---------- Fondo animado: pétalos, corazones, destellos ---------- */
+  const bg = document.getElementById('bg-animated');
+  function spawnParticles(){
+    const petalCount = 10, heartCount = 6, sparkleCount = 10;
+    for(let i=0;i<petalCount;i++){
+      const p = document.createElement('div');
+      p.className='petal';
+      p.style.left = Math.random()*100+'%';
+      p.style.animationDuration = (10+Math.random()*10)+'s';
+      p.style.animationDelay = (Math.random()*14)+'s';
+      p.innerHTML = `<svg width="${14+Math.random()*10}" height="${14+Math.random()*10}" viewBox="0 0 24 24" fill="none"><path d="M12 2c4 3 7 6 7 10a7 7 0 0 1-14 0c0-4 3-7 7-10z" fill="#E8608A" opacity="0.55"/></svg>`;
+      bg.appendChild(p);
+    }
+    for(let i=0;i<heartCount;i++){
+      const h = document.createElement('div');
+      h.className='heart-float';
+      h.style.left = Math.random()*100+'%';
+      h.style.animationDuration = (12+Math.random()*10)+'s';
+      h.style.animationDelay = (Math.random()*14)+'s';
+      h.innerHTML = `<svg width="${16+Math.random()*10}" height="${16+Math.random()*10}" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.2 2 4.5 5.6 4c2-.3 3.7.6 4.9 2.2C11.7 4.6 13.4 3.7 15.4 4c3.6.5 5.3 4.2 3.6 7.7C16.5 16.4 12 21 12 21z" stroke="#C99553" stroke-width="1.2"/></svg>`;
+      bg.appendChild(h);
+    }
+    for(let i=0;i<sparkleCount;i++){
+      const s = document.createElement('div');
+      s.className='sparkle';
+      s.style.left = Math.random()*100+'%';
+      s.style.top = Math.random()*100+'%';
+      s.style.animationDuration = (2+Math.random()*3)+'s';
+      s.style.animationDelay = (Math.random()*5)+'s';
+      s.style.width = s.style.height = (3+Math.random()*3)+'px';
+      s.style.borderRadius='50%';
+      s.style.background = '#E8C793';
+      bg.appendChild(s);
+    }
+  }
+  spawnParticles();
+
+  /* ---------- Scroll progress bar ---------- */
+  const progressBar = document.getElementById('progress-bar');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressBar.style.width = scrolled + '%';
+  }
+  document.addEventListener('scroll', () => {
+    updateProgress();
+    headerShrink();
+    toggleBackToTop();
+  }, { passive:true });
+
+  /* ---------- Header shrink on scroll ---------- */
+  const header = document.getElementById('site-header');
+  function headerShrink(){
+    if(window.scrollY > 40) header.classList.add('shrink');
+    else header.classList.remove('shrink');
+  }
+
+  /* ---------- Mobile nav ---------- */
+  const burger = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobile-nav');
+  const mobileClose = document.getElementById('mobile-close');
+  burger.addEventListener('click', () => mobileNav.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  /* ---------- Dark mode toggle ---------- */
+  const themeToggle = document.getElementById('theme-toggle');
+  themeToggle.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  });
+
+  /* ---------- Scroll reveal (IntersectionObserver) ---------- */
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold:0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  /* ---------- Animated counters ---------- */
+  const counters = document.querySelectorAll('.stat-num');
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        animateCounter(entry.target);
+        counterIO.unobserve(entry.target);
+      }
+    });
+  }, { threshold:0.5 });
+  counters.forEach(c => counterIO.observe(c));
+
+  function animateCounter(el){
+    const target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+    function tick(now){
+      const progress = Math.min((now-start)/duration, 1);
+      const eased = 1 - Math.pow(1-progress, 3);
+      el.textContent = Math.floor(eased*target).toLocaleString('es-PA') + suffix;
+      if(progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString('es-PA') + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- Testimonials carousel ---------- */
+  const track = document.getElementById('carousel-track');
+  const slides = track.children.length;
+  const dotsWrap = document.getElementById('carousel-dots');
+  let current = 0, autoTimer;
+
+  for(let i=0;i<slides;i++){
+    const dot = document.createElement('button');
+    if(i===0) dot.classList.add('active');
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  }
+  function goTo(i){
+    current = (i+slides)%slides;
+    track.style.transform = `translateX(-${current*100}%)`;
+    [...dotsWrap.children].forEach((d,idx) => d.classList.toggle('active', idx===current));
+  }
+  document.getElementById('carousel-next').addEventListener('click', () => { goTo(current+1); resetAuto(); });
+  document.getElementById('carousel-prev').addEventListener('click', () => { goTo(current-1); resetAuto(); });
+  function resetAuto(){
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(current+1), 5000);
+  }
+  resetAuto();
+
+  /* ---------- Pack comparator toggle ---------- */
+  const compareBtn = document.getElementById('compare-toggle-btn');
+  const compareWrap = document.getElementById('compare-table-wrap');
+  compareBtn.addEventListener('click', () => {
+    compareWrap.classList.toggle('open');
+    compareBtn.textContent = compareWrap.classList.contains('open') ? 'Ocultar comparación' : 'Comparar los 3 packs';
+  });
+
+  /* ---------- Gallery lightbox ---------- */
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  document.querySelectorAll('.gallery-item[data-src]').forEach(item => {
+    item.addEventListener('click', () => {
+      lightboxImg.src = item.dataset.src;
+      lightbox.classList.add('open');
+    });
+  });
+  document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
+  lightbox.addEventListener('click', (e) => { if(e.target===lightbox) lightbox.classList.remove('open'); });
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* ---------- Countdown timer ---------- */
+  const countdownEl = {
+    d: document.getElementById('cd-days'),
+    h: document.getElementById('cd-hours'),
+    m: document.getElementById('cd-min'),
+    s: document.getElementById('cd-sec')
+  };
+  let target = new Date();
+  target.setDate(target.getDate() + 2);
+  target.setHours(23,59,59,0);
+  function tickCountdown(){
+    const diff = target - new Date();
+    if(diff <= 0){ target.setDate(target.getDate()+2); return; }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    countdownEl.d.textContent = String(d).padStart(2,'0');
+    countdownEl.h.textContent = String(h).padStart(2,'0');
+    countdownEl.m.textContent = String(m).padStart(2,'0');
+    countdownEl.s.textContent = String(s).padStart(2,'0');
+  }
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
+
+  /* ---------- Back to top ---------- */
+  const backToTop = document.getElementById('back-to-top');
+  function toggleBackToTop(){
+    if(window.scrollY > 600) backToTop.classList.add('show');
+    else backToTop.classList.remove('show');
+  }
+  backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  /* ---------- Formulario de contacto con validación ---------- */
+  const form = document.getElementById('contact-form');
+  const formMsg = document.getElementById('form-msg');
+  form.addEventListener('submit', (e) => {
+    let valid = true;
+    const fields = [
+      { id:'f-name', test:v => v.trim().length > 1 },
+      { id:'f-email', test:v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+      { id:'f-phone', test:v => v.trim().length >= 7 },
+      { id:'f-city', test:v => v.trim().length > 1 },
+      { id:'f-message', test:v => v.trim().length > 4 }
+    ];
+    fields.forEach(f => {
+      const input = document.getElementById(f.id);
+      const error = document.getElementById(f.id+'-error');
+      if(!f.test(input.value)){
+        error.classList.add('show');
+        valid = false;
+      } else {
+        error.classList.remove('show');
+      }
+    });
+    if(!valid){
+      e.preventDefault();
+      formMsg.textContent = 'Por favor revisa los campos marcados en rojo.';
+      formMsg.classList.add('show');
+    } else {
+      formMsg.textContent = 'Enviando tu solicitud... se abrirá tu correo para confirmarla.';
+      formMsg.classList.add('show');
+    }
+  });
+
+  /* initial paint */
+  updateProgress();
+  headerShrink();
+});
+
+</script>
+</body>
+</html>
